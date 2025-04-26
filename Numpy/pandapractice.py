@@ -2,11 +2,94 @@ import numpy as np
 import pandas as pd
 
 
+'''Pandas Series and Numpy Array'''
 
-price_list = [100, 200, 300, 400, 500]
-med_price_array  =  np.array(price_list)
-series_list = pd.Series(price_list)
-series_list2 = pd.Series(med_price_array)   
-print(series_list)
-print(series_list2)
+# price_list = [100, 200, 300, 400, 500]
+# med_price_array  =  np.array(price_list)
+# series_list = pd.Series(price_list)
+# series_list2 = pd.Series(med_price_array)   
+# print(series_list)
+# print(series_list2)
 
+
+# price_list_labeled = pd.Series(price_list, index=['Omeprazole', 'Azethromycine', 'MMeta', 'profim', 'Paracetamol'])
+# print(price_list_labeled)
+
+# price_list_labeled = price_list_labeled + 2
+# print(price_list_labeled)
+
+# new_price_list = pd.Series([100, 200, 300, 400, 500], index=['Omeprazole', 'Azethromycine', 'MMeta', 'profim', 'Paracetamol'])
+# print(new_price_list - price_list_labeled)
+
+
+'''Pandas DataFrame and Numpy Array'''
+
+# student = ['John', 'Jane', 'Tom', 'Jerry']
+# student_data_frame = pd.DataFrame(student, columns=['Student'])
+# print(student_data_frame)
+
+# grades= [90, 80, 85, 95]
+# # Creating a DataFrame with two columns: Student and Grade
+# print(pd.DataFrame({'Student' : student, 'Grade' : grades}))
+
+# series1 = pd.Series([1, 2, 3])
+# series2 = pd.Series([4, 5, 6])
+# print(pd.DataFrame({'A': series1, 'B': series2}))
+
+# print(pd.DataFrame(np.random.randn(5,2), columns=['Trial 1', 'Trial 2'])) # 5 rows and 2 columns of random numbers
+
+'''Pandas Accessing series'''
+
+# operators = ['AT&T', 'Verizon', 'T-Mobile']
+# revenue = [100, 200, 300]
+# telecom = pd.Series(revenue, index=operators)
+# print(telecom, telecom[0])
+# print(telecom[1:3]) # slicing
+# print(telecom[telecom > 100]) # boolean indexing
+# print(telecom[['AT&T', 'T-Mobile']]) # indexing with labels
+
+'''Pandas Accessing DataFrame'''
+
+store_data = pd.DataFrame({'CustomerId' : [1, 2, 3, 4], 
+                           'Name' : ['John', 'Jane', 'Tom', 'Jerry'],
+                           'Age' : [25, 30, 35, 40],
+                           'City' : ['New York', 'Los Angeles', 'Chicago', 'Houston']})
+
+# print(store_data)
+
+'''loc and iloc'''
+
+# print(store_data['Name']) # Accessing a single column / dimension
+# print(store_data[['Name', 'Age']]) # Accessing multiple columns / dimenstions 
+# print(store_data[:3]) # Accessing a range of rows
+# print(store_data[store_data['Age'] > 30]) # Accessing rows based on a condition
+# print(store_data[::2]) # Accessing every other row
+# print(store_data[store_data['Name'].isin(['John', 'Tom'])]) # Accessing rows based on a list of values
+
+
+# print(store_data.loc[1]) # Accessing a row by label
+# print(store_data.loc[[1,3],['Name','Age']]) # Accessing a row by index
+# print(store_data.loc[store_data['Age'] > 30, ['Name', 'City']]) # Accessing a row by condition
+
+# print(stored_data.iloc[1]) # Accessing a row by index
+# print(store_data.iloc[[1,3], [1,2]]) # Accessing a row by index
+# print(store_data.iloc[store_data['Age'] > 30, [1,3]]) # Accessing a row by condition    
+
+# store_data.loc[3, 'Age'] = 45 # Updating a value in the DataFrame
+# print(store_data)    
+
+store_data['rating'] = [4.5, 3.8, 4.2, 4.0] # Adding a new column to the DataFrame
+# print(store_data)
+# store_data['rating'] = store_data['rating'] + 1 # Updating a column in the DataFrame  
+
+# store_data.drop('rating', axis=1, inplace=True) # Dropping a column from the DataFrame;
+#if inplace is not used, it will not be dropped from the original DataFrame and create a new DataFrame
+# print(store_data)
+
+new_storedata = store_data.copy() # Dropping rows from the DataFrame
+# print(new_storedata)
+new_storedata.drop([0, 1], inplace=True) # Dropping rows from the DataFrame
+# print(new_storedata)
+# print(store_data)
+print(store_data.reset_index(drop=True)) # Resetting the index of the DataFrame
+print(store_data.set_index('Name')) # Setting a column as the index of the DataFrame  
