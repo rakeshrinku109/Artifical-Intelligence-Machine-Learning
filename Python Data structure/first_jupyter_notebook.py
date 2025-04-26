@@ -291,3 +291,10 @@ def find_first_tenevennumbers():
 
 find_first_tenevennumbers()
 
+'''
+Python method vs functions 
+
+method are functions that are associated with an object.
+Functions are standalone and not associated with any object.
+  
+'''
