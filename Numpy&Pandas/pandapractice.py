@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import os
 
 '''Pandas Series and Numpy Array'''
 
@@ -86,10 +86,60 @@ store_data['rating'] = [4.5, 3.8, 4.2, 4.0] # Adding a new column to the DataFra
 #if inplace is not used, it will not be dropped from the original DataFrame and create a new DataFrame
 # print(store_data)
 
-new_storedata = store_data.copy() # Dropping rows from the DataFrame
+# new_storedata = store_data.copy() # Dropping rows from the DataFrame
 # print(new_storedata)
-new_storedata.drop([0, 1], inplace=True) # Dropping rows from the DataFrame
+# new_storedata.drop([0, 1], inplace=True) # Dropping rows from the DataFrame
 # print(new_storedata)
 # print(store_data)
-print(store_data.reset_index(drop=True)) # Resetting the index of the DataFrame
-print(store_data.set_index('Name')) # Setting a column as the index of the DataFrame  
+# print(store_data.reset_index(drop=True)) # Resetting the index of the DataFrame
+# print(store_data.set_index('Name')) # Setting a column as the index of the DataFrame  
+
+
+store_data_new = pd.DataFrame({'CustomerId' : [2, 3, 4,5,6], 
+                           'Sales' : [ 200, 300, 400,500,600],
+                           'Distance' : [30, 35, 40,50,60],
+                           'City' : ['Los Angeles', 'Chicago', 'Houston', 'bombay', 'delhi']})
+
+# print(pd.concat([store_data, store_data_new], axis=0))
+# print(pd.concat([store_data, store_data_new], axis=1))
+
+# inner_join = pd.merge(store_data, store_data_new, on='CustomerId', how='inner') # Merging two DataFrames = Intersection of two DataFrames
+# outer_join = pd.merge(store_data, store_data_new, on='CustomerId', how='outer') # Merging two DataFrames = union of two DataFrames 
+# print(inner_join)
+# print(outer_join)
+
+
+# print(pd.merge(store_data, store_data_new, on='CustomerId', how='right')) # Merging two DataFrames = right join of two DataFrames
+# print(pd.merge(store_data, store_data_new, on='CustomerId', how='left')) # Merging two DataFrames = left join of two DataFrames
+
+
+
+'''load folder and read csv file'''
+# i need to read stockdata.csv file from the folder Datasets
+# i need to read the file into a pandas dataframe
+# i need to print the first 5 rows of the dataframe 
+
+
+print("Current Working Directory:", os.getcwd())
+
+csv_file_path = 'Numpy&Pandas/Datasets/StockData.csv'
+excel_file_path = 'Numpy&Pandas/Datasets/StockData.xlsx'
+
+#check if the excel file exists
+if os.path.exists(excel_file_path):
+    data_frame = pd.read_excel(excel_file_path)
+    print(data_frame.head())
+else:
+    print(f"File not found: {csv_file_path}")
+
+if os.path.exists(csv_file_path):
+    data_frame = pd.read_csv(csv_file_path)
+    print(data_frame.head()) # Display the first 5 rows of the DataFrame
+    
+else:
+    print(f"File not found: {csv_file_path}")
+    
+# save the dataframe to a new csv file
+data_frame.to_csv('Numpy&Pandas/Datasets/StockData_new.csv', index=False) # Save the DataFrame to a new CSV file
+# save the dataframe to a new excel file
+data_frame.to_excel('Numpy&Pandas/Datasets/StockData_new.xlsx', index=False) # Save the DataFrame to a new Excel file
