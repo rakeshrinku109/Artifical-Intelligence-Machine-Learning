@@ -120,7 +120,7 @@ store_data_new = pd.DataFrame({'CustomerId' : [2, 3, 4,5,6],
 # i need to print the first 5 rows of the dataframe 
 
 
-print("Current Working Directory:", os.getcwd())
+# print("Current Working Directory:", os.getcwd())
 
 csv_file_path = 'Numpy&Pandas/Datasets/StockData.csv'
 excel_file_path = 'Numpy&Pandas/Datasets/StockData.xlsx'
@@ -128,18 +128,48 @@ excel_file_path = 'Numpy&Pandas/Datasets/StockData.xlsx'
 #check if the excel file exists
 if os.path.exists(excel_file_path):
     data_frame = pd.read_excel(excel_file_path)
-    print(data_frame.head())
+    # print(data_frame.head())
 else:
     print(f"File not found: {csv_file_path}")
 
 if os.path.exists(csv_file_path):
     data_frame = pd.read_csv(csv_file_path)
-    print(data_frame.head()) # Display the first 5 rows of the DataFrame
+    # print(data_frame.head()) # Display the first 5 rows of the DataFrame
     
 else:
     print(f"File not found: {csv_file_path}")
     
+
+# print(data_frame.tail(), '\n \n', data_frame.shape, data_frame.info()) # Display the first 5 rows of the DataFrame
+
+# print(data_frame['stock'].unique(), '\n \n', data_frame['stock'].value_counts()) # Display the unique values in the stock column and the number of unique values
+
+# print(data_frame['price'].mean(), data_frame['price'].mode() ) # Display the number of unique values in the stock column
+
+
+print(data_frame.groupby('stock')['price'].mean()) # Grouping the DataFrame by stock and calculating the mean price for each stock
+
+# data_frame['new_price'] = data_frame['price'].apply(lambda x: x * 1.1) # Applying a function to the price column to increase the price by 10%
+# print(data_frame['new_price'].head()) # Display the updated price column
+# print(data_frame.head())
+data_frame.sort_values(by='price', ascending=False, inplace=True) # Sorting the DataFrame by price in descending order
+print(data_frame.to_string()) # Display all values in the DataFrame
+
+        
 # save the dataframe to a new csv file
-data_frame.to_csv('Numpy&Pandas/Datasets/StockData_new.csv', index=False) # Save the DataFrame to a new CSV file
+# data_frame.to_csv('Numpy&Pandas/Datasets/StockData_new.csv', index=False) # Save the DataFrame to a new CSV file
 # save the dataframe to a new excel file
-data_frame.to_excel('Numpy&Pandas/Datasets/StockData_new.xlsx', index=False) # Save the DataFrame to a new Excel file
+# data_frame.to_excel('Numpy&Pandas/Datasets/StockData_new.xlsx', index=False) # Save the DataFrame to a new Excel file
+    
+#Date time functions
+# data_frame.info() # Display the information about the DataFrame
+# data_frame['date'] = pd.to_datetime(data_frame['date'], dayfirst=True) # Convert the date column to datetime format
+# data_frame.info() # Display the information about the DataFrame
+# print(data_frame['date'].dt.strftime('%m/%d/%y')) # Convert the date column to string format
+
+# print(data_frame.head()) # Display the first 5 rows of the DataFrame
+
+
+
+
+

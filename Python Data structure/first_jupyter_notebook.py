@@ -298,3 +298,18 @@ method are functions that are associated with an object.
 Functions are standalone and not associated with any object.
   
 '''
+
+#Operating lambda on a list
+Number = [1,2,3,4,5,6,7,8,9,10]
+process_even_numbers = lambda numbers: [
+  (num * 2 + 5) / 2 for num in numbers if num % 2 == 0
+]
+
+even = process_even_numbers(Number)
+print(even)
+
+
+#use of filter
+print(filter(lambda x : x % 2 !=0, Number))
+
+#explore map as well. THe are similar to LinQ in c#
